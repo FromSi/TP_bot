@@ -2,3 +2,10 @@ flask
 requests
 beautifulsoup4
 lxml
+sqlalchemy
+flask-sqlalchemy
+flask-migrate
+flask-script
+psycopg2
+alembic
+gunicorn
