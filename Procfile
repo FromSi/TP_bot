@@ -1,1 +1,1 @@
-web: gunicorn app:run -b pidor65-tp-bot.herokuapp.com
+web: gunicorn run:app
