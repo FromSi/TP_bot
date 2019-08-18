@@ -9,11 +9,11 @@ def get_members():
     if members_on.first() is not None:
         text += 'Играют:\n'
         text += _get_members(members_on)
-        text += '\n\n'
+        text += '\n'
     elif members_off.first() is not None:
         text += 'Не играют:\n'
         text += _get_members(members_off)
-        text += '\n\n'
+        text += '\n'
 
     text += 'Расчёт пидорасов окончен!'
 
