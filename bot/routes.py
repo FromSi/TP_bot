@@ -31,3 +31,5 @@ def main():
 def cron_search():
     if request.method == 'POST':
         search.main()
+
+        return 'OK'
