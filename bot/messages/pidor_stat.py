@@ -51,11 +51,12 @@ def _get_members(members):
 
 
 def _get_rate(members):
+    sort_members = members.order_by(models.StatPidor.count.desk()).all()
     text = ''
 
     for i in range(members.count()):
-        user = models.User.query.get(members.all()[i].user_id)
-        text += f'\t\t@{user.username} - {members.all()[i].count} раз(а)'
+        user = models.User.query.get(sort_members[i].user_id)
+        text += f'\t\t@{user.username} - {sort_members[i].count} раз(а)'
 
     return text
 
