@@ -27,7 +27,7 @@ def main():
         return 'I bot'
 
 
-@app.route(f"/{os.environ['PATH_CRON_SEARCH']}", methods=['POST'])
+@app.route(f"/cron-search/", methods=['POST'])
 def cron_search():
     if request.method == 'POST':
         search.main()
