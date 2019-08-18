@@ -51,7 +51,7 @@ def _get_members(members):
 
 
 def _get_rate(members):
-    sort_members = members.order_by(models.StatPidor.count.desk()).all()
+    sort_members = members.order_by(models.StatPidor.count.desc()).all()
     text = ''
 
     for i in range(members.count()):
