@@ -56,7 +56,7 @@ def _get_rate(members):
 
     for i in range(members.count()):
         user = models.User.query.get(sort_members[i].user_id)
-        text += f'\t\t@{user.username} - {sort_members[i].count} раз(а)'
+        text += f'  @{user.username} - {sort_members[i].count} раз(а)\n'
 
     return text
 
