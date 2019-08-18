@@ -45,7 +45,7 @@ def _get_members(members):
 
     for i in range(members.count()):
         user = models.User.query.get(members.all()[i].user_id)
-        text += f'\t\t{i + 1}) @{user.username}'
+        text += f'  {i + 1}) @{user.username}\n'
 
     return text
 
