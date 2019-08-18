@@ -15,7 +15,7 @@ def main():
         requests.post(
             telegram_api.get_send_message(),
             data={
-                'chat_id': chat_id, 
+                'chat_id': telegram_api.CHAT_ID, 
                 'text': commands.main(data), 
                 'disable_notification': True
             }
