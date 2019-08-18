@@ -1,4 +1,4 @@
-from util import weather
+from bot.cron.util import weather
 
 
 def get_weather(weather_link):

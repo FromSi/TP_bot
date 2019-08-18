@@ -1,7 +1,7 @@
 import sqlalchemy as db
 import random, os, requests
-from messages import weather, horoscope
-from util import telegram_api
+from bot.cron.messages import weather, horoscope
+from bot.util import telegram_api
 from sqlalchemy import update
 
 
@@ -73,7 +73,3 @@ def _get_user(id):
     result_proxy = connection.execute(user_query)
 
     return result_proxy.fetchall()[0]
-
-
-if __name__ == "__main__":
-    main()

@@ -3,7 +3,8 @@ from bot import models
 from flask import request
 from bot.util import telegram_api
 from bot import commands
-import requests
+import requests, os
+from bot.cron import search
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -24,3 +25,9 @@ def main():
         return 'OK'
     elif request.method == 'GET':
         return 'I bot'
+
+
+@app.route(f"/{os.environ['PATH_CRON_SEARCH']}", methods=['POST'])
+def cron_search():
+    if request.method == 'POST':
+        search.main()

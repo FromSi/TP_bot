@@ -1,4 +1,4 @@
-from util import horoscope
+from bot.cron.util import horoscope
 
 
 def get_horoscope(name):
