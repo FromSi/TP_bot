@@ -7,11 +7,11 @@ def main(data):
 
 
 def _router(data):
-    if data['message']['text'] == '/pidorrate':
+    if data['message']['text'] == '/pidorrate@pidroid65_bot':
         return pidor_stat.get_rate()
-    elif data['message']['text'] == '/pidormembers':
+    elif data['message']['text'] == '/pidormembers@pidroid65_bot':
         return pidor_stat.get_members()
-    elif data['message']['text'] == '/pidorswitch':
+    elif data['message']['text'] == '/pidorswitch@pidroid65_bot':
         return pidor_stat.get_switch(_handler_pidor_switch(data))
 
 
