@@ -2,6 +2,7 @@ import os
 from bot import app
 from bot import commands
 from bot.cron import search
+from flask import request
 
 
 @app.route("/", methods=["GET", "POST"])
