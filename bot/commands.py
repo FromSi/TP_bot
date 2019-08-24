@@ -1,6 +1,6 @@
 from bot.messages import pidor_stat
 from bot import models, db
-from bot.cron.util import horoscope, weather
+from bot.cron.messages import horoscope, weather
 
 
 def main(data):

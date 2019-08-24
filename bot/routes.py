@@ -14,7 +14,6 @@ def telegram():
         get='Бот для телеграм чата.',
         post=telegram_api.sendMessage()
     )
-    # return 'OK'
 
 
 @app.route(f"/{os.environ['PATH_CRON_SEARCH']}/", methods=['POST'])
