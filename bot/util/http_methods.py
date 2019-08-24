@@ -1,4 +1,4 @@
-def base(request, get=None, post=None, delete=None, put=None):
+def base(get=None, post=None, delete=None, put=None):
     if request.method == 'GET':
         get
 
