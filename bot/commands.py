@@ -1,28 +1,47 @@
 from bot.messages import pidor_stat
-from bot.util import telegram_parse, telegram_api
+from bot.util.telegram import parser, api
 from bot import models, db
 from bot.cron.messages import horoscope, weather
 
 
 def run():
-    return _router_commands(telegram_parse.parse())
+    return _router()
 
 
-def _router_commands(data):
-    if data['message']['text'] == '/pidorrate@pidroid65_bot':
-        telegram_api.sendMessage(pidor_stat.get_rate())
-    elif data['message']['text'] == '/pidormembers@pidroid65_bot':
-        telegram_api.sendMessage(pidor_stat.get_members())
-    elif data['message']['text'] == '/pidorswitch@pidroid65_bot':
-        telegram_api.sendMessage(pidor_stat.get_switch(_handler_pidor_switch(data)))
-    elif data['message']['text'] == '/weather@pidroid65_bot':
-        telegram_api.sendReplyMessage(data['message']['message_id'], _handler_weather(data))
-    elif data['message']['text'] == '/horoscope@pidroid65_bot':
-        telegram_api.sendReplyMessage(data['message']['message_id'], _handler_horoscope(data))
+def _router():
+    command = parser.command()
+    message_id = parser.message_id()
+
+    if command == '/pidorrate@pidroid65_bot':
+        api.sendMessage(
+            pidor_stat.get_rate()
+        )
+
+    elif command == '/pidormembers@pidroid65_bot':
+        api.sendMessage(
+            pidor_stat.get_members()
+        )
+
+    elif command == '/pidorswitch@pidroid65_bot':
+        api.sendMessage(
+            _pidor_switch()
+        )
+
+    elif command == '/weather@pidroid65_bot':
+        api.sendReplyMessage(
+            message_id, 
+            _weather()
+        )
+
+    elif command == '/horoscope@pidroid65_bot':
+        api.sendReplyMessage(
+            message_id, 
+            _horoscope()
+        )
 
 
-def _handler_weather(data):
-    username = data['message']['from']['username']
+def _weather():
+    username = parser.username()
     user = models.User.query.filter_by(username=username).first()
 
     if user is None:
@@ -31,8 +50,8 @@ def _handler_weather(data):
         return weather.get_weather(user.weather_city)
 
 
-def _handler_horoscope(data):
-    username = data['message']['from']['username']
+def _horoscope():
+    username = parser.username()
     user = models.User.query.filter_by(username=username).first()
 
     if user is None:
@@ -41,12 +60,16 @@ def _handler_horoscope(data):
         return horoscope.get_horoscope(user.horoscope)
 
 
-def _handler_pidor_switch(data):
-    username = data['message']['from']['username']
+def _pidor_switch():
+    username = parser.username()
     user = models.User.query.filter_by(username=username).first()
     
+    answer_one = 'Тебя еще не зарегали в базу пользователей! Ты нахуй никому не нужен!'
+    answer_two = 'Всё! Ты в игре!! ТОБИ ПЕЗТА!!!'
+    answer_three = 'С тобой ВСЁ!'
+
     if user is None:
-        return 3
+        return answer_one
     else:
         user_id = user.id
         player = models.PidorGame.query.filter_by(user_id=user_id).first()
@@ -56,15 +79,13 @@ def _handler_pidor_switch(data):
             db.session.add(new_player)
             db.session.commit()
             
-            return 1
+            return answer_two
         else:
             player.is_active = not player.is_active
             db.session.add(player)
             db.session.commit()
 
             if player.is_active:                
-                return 1
+                return answer_two
             else:
-                return 2
-
-
+                return answer_three

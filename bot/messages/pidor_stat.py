@@ -31,15 +31,6 @@ def get_rate():
     return text
 
 
-def get_switch(code):
-    if code == 1:
-        return 'Всё! Ты в игре!! ТОБИ ПЕЗТА!!!'
-    elif code == 2:
-        return 'С тобой ВСЁ!'
-    elif code == 3:
-        return 'Тебя еще не зарегали в базу пользователей! Ты нахуй никому не нужен!'
-
-
 def _get_members(members):
     text = ''
 
