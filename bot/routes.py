@@ -10,10 +10,11 @@ from bot.util import http_methods
 
 @app.route("/", methods=["GET", "POST"])
 def telegram():
-    return http_methods.base(
-        get='Бот для телеграм чата.',
-        post=telegram_api.sendMessage()
-    )
+    # return http_methods.base(
+    #     get='Бот для телеграм чата.',
+    #     post=telegram_api.sendMessage()
+    # )
+    return 'OK'
 
 
 @app.route(f"/{os.environ['PATH_CRON_SEARCH']}/", methods=['POST'])
