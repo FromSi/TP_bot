@@ -27,7 +27,7 @@ def _handler_weather(data):
     if user is None:
         return 'Ты вначале зарегайся, а потом проси..'
     else:
-        return horoscope.get_weather(user.weather_city)
+        return weather.get_weather(user.weather_city)
 
 
 def _handler_horoscope(data):

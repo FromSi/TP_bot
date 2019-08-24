@@ -9,7 +9,7 @@ URL = f'https://api.telegram.org/bot{TOKEN}/'
 
 def sendMessage():
     requests.post(
-        telegram_api.get_send_message(),
+        telegram_parse.get_send_message(),
         data={
             'chat_id': CHAT_ID, 
             'text': commands.main(telegram_parse.parse()), 
