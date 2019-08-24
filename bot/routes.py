@@ -6,7 +6,7 @@ from bot.util import http_methods
 
 
 @app.route("/", methods=["GET", "POST"])
-def telegram():
+def main():
     return http_methods.base(
         get='Бот для телеграм чата.',
         post=commands.run()
