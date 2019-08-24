@@ -18,7 +18,7 @@ def main():
 
         text = f'Сегодня пидор @{user.username}!\n\n'
         text += horoscope.get_horoscope(user.horoscope)
-        text += weather.get_weather(user.weather_city)
+        text += '\n' + weather.get_weather(user.weather_city)
 
         _send_message(text + '\n🤖 Бета версия')
         _write_result(user)

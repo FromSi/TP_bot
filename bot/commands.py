@@ -1,5 +1,6 @@
 from bot.messages import pidor_stat
 from bot import models, db
+from bot.cron.util import horoscope, weather
 
 
 def main(data):
@@ -13,6 +14,30 @@ def _router(data):
         return pidor_stat.get_members()
     elif data['message']['text'] == '/pidorswitch@pidroid65_bot':
         return pidor_stat.get_switch(_handler_pidor_switch(data))
+    elif data['message']['text'] == '/weather@pidroid65_bot':
+        return _handler_weather(data)
+    elif data['message']['text'] == '/horoscope@pidroid65_bot':
+        return _handler_horoscope(data)
+
+
+def _handler_weather(data):
+    username = data['message']['from']['username']
+    user = models.User.query.filter_by(username=username).first()
+
+    if user is None:
+        return 'Ты вначале зарегайся, а потом проси..'
+    else:
+        return horoscope.get_weather(user.weather_city)
+
+
+def _handler_horoscope(data):
+    username = data['message']['from']['username']
+    user = models.User.query.filter_by(username=username).first()
+
+    if user is None:
+        return 'Ты вначале зарегайся, а потом проси..'
+    else:
+        return horoscope.get_horoscope(user.horoscope)
 
 
 def _handler_pidor_switch(data):

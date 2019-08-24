@@ -3,7 +3,7 @@ from bot.cron.util import weather
 
 def get_weather(weather_link):
     array = weather.get_weather(weather_link)
-    text = '\n⛅️ Погода на сегодня:\n'
+    text = '⛅️ Погода на сегодня:\n'
     
     for item in array:
         text += f'{_get_emoji_time(item[0])}  🌡 {item[1]}  🌬 {item[2]}м/c\n'
