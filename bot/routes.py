@@ -9,12 +9,12 @@ from bot.util import http_methods
 def main():
     return http_methods.base(
         get='Бот для телеграм чата.',
-        post=commands.run()
+        post=commands.run
     )
 
 
 @app.route(f"/{os.environ['PATH_CRON_SEARCH']}/", methods=['POST'])
 def cron_search():
     return http_methods.base(
-        post=search.main()
+        post=search.main
     )
