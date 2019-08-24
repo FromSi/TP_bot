@@ -1,7 +1,7 @@
 import sqlalchemy as db
 import random, os, requests
 from bot.cron.messages import weather, horoscope
-from bot.util import telegram_api
+from bot.util.telegram import api
 from sqlalchemy import update
 
 
