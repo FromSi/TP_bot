@@ -1,5 +1,6 @@
 import os, requests
 from bot.util import telegram_parse
+from bot import commands
 
 
 TOKEN = os.environ['TOKEN_BOT']
