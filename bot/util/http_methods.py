@@ -1,3 +1,6 @@
+from flask import request
+
+
 def base(get=None, post=None, delete=None, put=None):
     if request.method == 'GET':
         get
