@@ -1,23 +1,24 @@
 from bot.messages import pidor_stat
+from bot.util import telegram_parse, telegram_api
 from bot import models, db
 from bot.cron.messages import horoscope, weather
 
 
-def main(data):
-    return _router(data)
+def run():
+    return _router_commands(telegram_parse.parse())
 
 
-def _router(data):
+def _router_commands(data):
     if data['message']['text'] == '/pidorrate@pidroid65_bot':
-        return pidor_stat.get_rate()
+        telegram_api.sendMessage(pidor_stat.get_rate())
     elif data['message']['text'] == '/pidormembers@pidroid65_bot':
-        return pidor_stat.get_members()
+        telegram_api.sendMessage(pidor_stat.get_members())
     elif data['message']['text'] == '/pidorswitch@pidroid65_bot':
-        return pidor_stat.get_switch(_handler_pidor_switch(data))
+        telegram_api.sendMessage(pidor_stat.get_switch(_handler_pidor_switch(data)))
     elif data['message']['text'] == '/weather@pidroid65_bot':
-        return _handler_weather(data)
+        telegram_api.sendReplyMessage(data['message']['message_id'], _handler_weather(data))
     elif data['message']['text'] == '/horoscope@pidroid65_bot':
-        return _handler_horoscope(data)
+        telegram_api.sendReplyMessage(data['message']['message_id'], _handler_horoscope(data))
 
 
 def _handler_weather(data):
