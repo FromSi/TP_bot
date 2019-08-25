@@ -52,6 +52,15 @@
 * Готов!
 Так же можно почитать про [Heroku](https://www.heroku.com) и [Temporize Scheduler](https://elements.heroku.com/addons/temporize).
 
+### Пример установки env (ОС переменных) в UNIX
+Заходим в домашнюю директорию и находим файл ```.bash_profile``` (или наберите команду ```nano ~/.bash_profile```). И ниже в файл вносим следующие строки (изменяя под себя):
+```
+export CHAT_ID="1"
+export DATABASE_URL="postgres://root:root@127.0.0.1:5432/db_name"
+export PATH_CRON_SEARCH="search"
+export TOKEN_BOT="123456789:AAHbsQMW2boRQRGAsbq1t28ImmxaXnabXRY"
+```
+
 ## License
 ```
 The MIT License (MIT)
