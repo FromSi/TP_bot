@@ -20,19 +20,8 @@ def main():
         text += horoscope.get_horoscope(user.horoscope)
         text += '\n' + weather.get_weather(user.weather_city)
 
-        _send_message(text + '\n🤖 Бета версия')
+        api.sendMessage(text + '\n🤖 Бета версия')
         _write_result(user)
-
-
-def _send_message(text):
-        requests.post(
-            telegram_api.get_send_message(),
-            data={
-                'chat_id': telegram_api.CHAT_ID, 
-                'text': text, 
-                'disable_notification': True
-            }
-        )
 
 
 def _write_result(user):
