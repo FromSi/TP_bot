@@ -1,8 +1,8 @@
-from bot.cron.util import weather
+from bot.util import weather
 
 
-def get_weather(weather_link):
-    array = weather.get_weather(weather_link)
+def data(link):
+    array = weather.data(link)
     text = '⛅️ Погода на сегодня:\n'
     
     for item in array:

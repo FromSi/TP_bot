@@ -1,8 +1,9 @@
 import sqlalchemy as db
 import random, os, requests
-from bot.cron.messages import weather, horoscope
+from bot.messages import weather, horoscope
 from bot.util.telegram import api
 from sqlalchemy import update
+from bot.util import helpers
 
 
 engine = db.create_engine(os.environ['DATABASE_URL'])
@@ -17,8 +18,8 @@ def main():
         user = _get_user(random.choice(players).user_id)
 
         text = f'Сегодня пидор @{user.username}!\n\n'
-        text += horoscope.get_horoscope(user.horoscope)
-        text += '\n' + weather.get_weather(user.weather_city)
+        text += horoscope.data(helpers.horoscope(user))
+        text += '\n' + weather.data(helpers.weather(user))
 
         api.sendMessage(text + '\n🤖 Бета версия')
         _write_result(user)

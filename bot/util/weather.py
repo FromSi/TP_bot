@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def get_weather(link):
+def data(link):
     """Получение погоды на сегодня по ссылке www.gismeteo.com.
     
     Аргументы Функции:

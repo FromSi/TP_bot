@@ -1,7 +1,8 @@
 from bot.messages import pidor_stat
 from bot.util.telegram import parser, api
 from bot import models, db
-from bot.cron.messages import horoscope, weather
+from bot.messages import horoscope, weather
+from bot.util import helpers
 
 
 def run():
@@ -47,7 +48,9 @@ def _weather():
     if user is None:
         return 'Ты вначале зарегайся, а потом проси..'
     else:
-        return weather.get_weather(user.weather_city)
+        obj = helpers.weather(user)
+
+        return weather.data(obj.link)
 
 
 def _horoscope():
@@ -57,7 +60,9 @@ def _horoscope():
     if user is None:
         return 'Ты вначале зарегайся, а потом проси..'
     else:
-        return horoscope.get_horoscope(user.horoscope)
+        obj = helpers.horoscope(user)
+        
+        return horoscope.data(obj.name, obj.symbol)
 
 
 def _pidor_switch():

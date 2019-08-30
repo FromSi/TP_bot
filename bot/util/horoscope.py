@@ -1,7 +1,7 @@
 from requests import get
 import xml.etree.ElementTree as ET
 
-def get_horoscope(name):
+def data(name):
     """Получить сегодняшний гороскоп ${name}
     
     Аргументы функции:
