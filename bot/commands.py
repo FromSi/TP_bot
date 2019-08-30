@@ -50,7 +50,7 @@ def _weather():
     else:
         obj = helpers.weather(user)
 
-        return weather.data(obj.link)
+        return weather.data(obj['link'])
 
 
 def _horoscope():
@@ -62,7 +62,7 @@ def _horoscope():
     else:
         obj = helpers.horoscope(user)
         
-        return horoscope.data(obj.name, obj.symbol)
+        return horoscope.data(obj['name'], obj['symbol'])
 
 
 def _pidor_switch():

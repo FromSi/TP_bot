@@ -16,10 +16,12 @@ def main():
 
     if len(players) != 0:
         user = _get_user(random.choice(players).user_id)
+        obj_weather = helpers.weather(user)
+        obj_horoscope = helpers.horoscope(user)
 
         text = f'Сегодня пидор @{user.username}!\n\n'
-        text += horoscope.data(helpers.horoscope(user))
-        text += '\n' + weather.data(helpers.weather(user))
+        text += horoscope.data(obj_horoscope['name'], obj_horoscope['symbol'])
+        text += '\n' + weather.data(obj_weather['link'])
 
         api.sendMessage(text + '\n🤖 Бета версия')
         _write_result(user)
