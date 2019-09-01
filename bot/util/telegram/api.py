@@ -17,6 +17,18 @@ def sendMessage(text):
         }
     )
 
+
+def sendMarkdownMessage(text):
+    requests.post(
+        _url_send_message(),
+        data={
+            'chat_id': CHAT_ID, 
+            'text': text, 
+            'parse_mode': 'Markdown',
+            'disable_notification': True
+        }
+    )
+
 def sendReplyMessage(message_id, text):
     requests.post(
         _url_send_message(),

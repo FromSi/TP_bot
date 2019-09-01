@@ -38,7 +38,7 @@ def data(username, body):
     text += '\n\n'
     text += body
     text += '\n\n'
-    text += f'Автор: {username}'
+    text += f'_Автор: @{username}_'
 
     return text
 
@@ -49,7 +49,7 @@ def _title():
     for i in range(3):
         title += emoji_list[randrange(len(emoji_list))]
 
-    title += title_list[randrange(len(title_list))]
+    title += '*' + title_list[randrange(len(title_list))].upper() + '*'
 
     for i in range(3):
         title += emoji_list[randrange(len(emoji_list))]

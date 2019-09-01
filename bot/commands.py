@@ -43,7 +43,7 @@ def _router():
         )
 
     elif command[0:len(command_news)] == command_news:
-        api.sendMessage(
+        api.sendMarkdownMessage(
             news.data(username, command[len(command_news):])
         )
         api.deleteMessage(
