@@ -40,6 +40,8 @@ def data(username, body):
     text += '\n\n'
     text += f'Автор: {username}'
 
+    return text
+
 
 def _title():
     title = ''
