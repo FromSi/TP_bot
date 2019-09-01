@@ -10,7 +10,7 @@ def main():
     if request.method == 'GET':
         return 'Бот для телеграм чата.'
     elif request.method == 'POST':
-        commands.run()
+        # commands.run()
 
         return 'OK'
 
