@@ -14,9 +14,9 @@ def _router():
     message_id = parser.message_id()
     chat_id = parser.chat_id()
     chat_type = parser.type()
-    username = parser.username()
+    username = parser.username() != None if parser.username() else ''
     first_name = parser.first_name()
-    last_name = parser.last_name()
+    last_name = parser.last_name() != None if parser.last_name() else ''
 
     if command == '/start':
         if auth.is_private(chat_type):
