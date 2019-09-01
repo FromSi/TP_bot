@@ -31,28 +31,28 @@ def _router():
                 help.data()
             )
 
-    elif command == '/pidorrate@pidroid65_bot':
+    elif command == '/pidorrate@pidroid65_bot' or command == '/pidorrate':
         if auth.is_private_or_supergroup(chat_type, chat_id):
             api.sendMessage(
                 chat_id,
                 pidor_stat.get_rate()
             )
 
-    elif command == '/pidormembers@pidroid65_bot':
+    elif command == '/pidormembers@pidroid65_bot' or command == '/pidormembers':
         if auth.is_private_or_supergroup(chat_type, chat_id):
             api.sendMessage(
                 chat_id,
                 pidor_stat.get_members()
             )
 
-    elif command == '/pidorswitch@pidroid65_bot':
+    elif command == '/pidorswitch@pidroid65_bot' or command == '/pidorswitch':
         if auth.is_private_or_supergroup(chat_type, chat_id):
             api.sendMessage(
                 chat_id,
                 _pidor_switch()
             )
 
-    elif command == '/weather@pidroid65_bot':
+    elif command == '/weather@pidroid65_bot' or command == '/weather':
         if auth.is_private_or_supergroup(chat_type, chat_id):
             api.sendReplyMessage(
                 message_id, 
@@ -60,7 +60,7 @@ def _router():
                 _weather()
             )
 
-    elif command == '/horoscope@pidroid65_bot':
+    elif command == '/horoscope@pidroid65_bot' or command == '/horoscope':
         if auth.is_private_or_supergroup(chat_type, chat_id):
             api.sendReplyMessage(
                 message_id, 
