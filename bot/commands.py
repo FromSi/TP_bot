@@ -18,7 +18,7 @@ def _router():
     if command == '/start':
         api.sendMarkdownMessage(
             chat_id,
-            chat_id
+            parser.type()
         )
 
     elif command == '/pidorrate@pidroid65_bot':
