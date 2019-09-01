@@ -1,7 +1,7 @@
 from bot.messages import pidor_stat
 from bot.util.telegram import parser, api
 from bot import models, db
-from bot.messages import horoscope, weather, news, start
+from bot.messages import horoscope, weather, news, start, help
 from bot.util import helpers, auth
 
 
@@ -23,6 +23,13 @@ def _router():
             api.sendMarkdownMessage(
                 chat_id,
                 start.data()
+            )
+
+    elif command == '/help':
+        if auth.is_private_auth(chat_type, username):
+            api.sendMessage(
+                chat_id,
+                help.data()
             )
 
     elif command == '/pidorrate@pidroid65_bot':
