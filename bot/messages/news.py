@@ -33,12 +33,12 @@ title_list = [
 ]
 
 
-def data(username, body):
+def data(first_name, last_name, body):
     text = _title()
     text += '\n\n'
     text += body
     text += '\n\n'
-    text += f'_Автор: @{username}_'
+    text += f'_Автор: {first_name} {last_name}_'
 
     return text
 

@@ -15,6 +15,8 @@ def _router():
     chat_id = parser.chat_id()
     chat_type = parser.type()
     username = parser.username()
+    first_name = parser.first_name()
+    last_name = parser.last_name()
 
     if command == '/start':
         if auth.is_private(chat_type):
@@ -64,7 +66,7 @@ def _router():
         if auth.is_private_or_supergroup_auth(chat_type, chat_id, username):
             api.sendMarkdownMessage(
                 api.CHAT_ID,
-                news.data(username, command[len('/w') + 1:])
+                news.data(first_name, last_name, command[len('/w') + 1:])
             )
             api.deleteMessage(
                 message_id,

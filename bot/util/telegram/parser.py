@@ -25,5 +25,13 @@ def username():
     return parse()['message']['from']['username']
 
 
+def first_name():
+    return parse()['message']['from']['first_name']
+
+
+def last_name():
+    return parse()['message']['from']['last_name']
+
+
 def message_id():
     return parse()['message']['message_id']
