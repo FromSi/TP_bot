@@ -8,7 +8,6 @@ def data(name, symbol):
     return text
 
 
-
 def _get_emoji_horoscope(name):
     if name == 'aries':
         return '♈️'

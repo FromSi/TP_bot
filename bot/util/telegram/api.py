@@ -28,6 +28,19 @@ def sendReplyMessage(message_id, text):
         }
     )
 
+def deleteMessage(message_id):
+    requests.post(
+        _url_delete_message(),
+        data={
+            'chat_id': CHAT_ID, 
+            'message_id': message_id, 
+        }
+    )
+
 
 def _url_send_message():
     return f'{URL}sendMessage'
+
+
+def _url_delete_message():
+    return f'{URL}deleteMessage'

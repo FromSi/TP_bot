@@ -1,7 +1,7 @@
 from bot.messages import pidor_stat
 from bot.util.telegram import parser, api
 from bot import models, db
-from bot.messages import horoscope, weather
+from bot.messages import horoscope, weather, news
 from bot.util import helpers
 
 
@@ -10,8 +10,10 @@ def run():
 
 
 def _router():
+    command_news = '/w'
     command = parser.command()
     message_id = parser.message_id()
+    username = parser.username()
 
     if command == '/pidorrate@pidroid65_bot':
         api.sendMessage(
@@ -38,6 +40,14 @@ def _router():
         api.sendReplyMessage(
             message_id, 
             _horoscope()
+        )
+
+    elif command[0:len(command_news)] == command_news:
+        api.sendMessage(
+            news.data(username, command[len(command_news):])
+        )
+        api.deleteMessage(
+            message_id
         )
 
 
