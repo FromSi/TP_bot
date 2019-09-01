@@ -26,7 +26,7 @@ def _router():
 
     elif command == '/help':
         if auth.is_private_auth(chat_type, username):
-            api.sendMessage(
+            api.sendMarkdownMessage(
                 chat_id,
                 help.data()
             )
