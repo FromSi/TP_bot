@@ -10,49 +10,57 @@ def run():
 
 
 def _router():
-    
     command = parser.command()
     message_id = parser.message_id()
+    chat_id = parser.chat_id()
     username = parser.username()
 
     if command == '/start':
         api.sendMarkdownMessage(
-            start.data()
+            chat_id,
+            parser.parse()
         )
 
     elif command == '/pidorrate@pidroid65_bot':
         api.sendMessage(
+            chat_id,
             pidor_stat.get_rate()
         )
 
     elif command == '/pidormembers@pidroid65_bot':
         api.sendMessage(
+            chat_id,
             pidor_stat.get_members()
         )
 
     elif command == '/pidorswitch@pidroid65_bot':
         api.sendMessage(
+            chat_id,
             _pidor_switch()
         )
 
     elif command == '/weather@pidroid65_bot':
         api.sendReplyMessage(
             message_id, 
+            chat_id,
             _weather()
         )
 
     elif command == '/horoscope@pidroid65_bot':
         api.sendReplyMessage(
             message_id, 
+            chat_id,
             _horoscope()
         )
 
     elif command[0:len('/w')] == '/w':
         api.sendMarkdownMessage(
+            chat_id,
             news.data(username, command[len('/w') + 1:])
         )
         api.deleteMessage(
-            message_id
+            message_id,
+            chat_id
         )
 
 
