@@ -13,6 +13,10 @@ def chat_id():
     return parse()['message']['chat']['id']
 
 
+def type():
+    return parse()['message']['chat']['type']
+
+
 def command():
     return parse()['message']['text']
 
