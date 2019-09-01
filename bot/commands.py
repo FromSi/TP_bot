@@ -2,7 +2,7 @@ from bot.messages import pidor_stat
 from bot.util.telegram import parser, api
 from bot import models, db
 from bot.messages import horoscope, weather, news, start
-from bot.util import helpers
+from bot.util import helpers, auth
 
 
 def run():
@@ -13,55 +13,63 @@ def _router():
     command = parser.command()
     message_id = parser.message_id()
     chat_id = parser.chat_id()
+    chat_type = parser.type()
     username = parser.username()
 
     if command == '/start':
-        api.sendMarkdownMessage(
-            chat_id,
-            parser.type()
-        )
+        if auth.is_private(chat_type):
+            api.sendMarkdownMessage(
+                chat_id,
+                start.data()
+            )
 
     elif command == '/pidorrate@pidroid65_bot':
-        api.sendMessage(
-            chat_id,
-            pidor_stat.get_rate()
-        )
+        if auth.is_private_or_supergroup(chat_type, chat_id):
+            api.sendMessage(
+                chat_id,
+                pidor_stat.get_rate()
+            )
 
     elif command == '/pidormembers@pidroid65_bot':
-        api.sendMessage(
-            chat_id,
-            pidor_stat.get_members()
-        )
+        if auth.is_private_or_supergroup(chat_type, chat_id):
+            api.sendMessage(
+                chat_id,
+                pidor_stat.get_members()
+            )
 
     elif command == '/pidorswitch@pidroid65_bot':
-        api.sendMessage(
-            chat_id,
-            _pidor_switch()
-        )
+        if auth.is_private_or_supergroup(chat_type, chat_id):
+            api.sendMessage(
+                chat_id,
+                _pidor_switch()
+            )
 
     elif command == '/weather@pidroid65_bot':
-        api.sendReplyMessage(
-            message_id, 
-            chat_id,
-            _weather()
-        )
+        if auth.is_private_or_supergroup(chat_type, chat_id):
+            api.sendReplyMessage(
+                message_id, 
+                chat_id,
+                _weather()
+            )
 
     elif command == '/horoscope@pidroid65_bot':
-        api.sendReplyMessage(
-            message_id, 
-            chat_id,
-            _horoscope()
-        )
+        if auth.is_private_or_supergroup(chat_type, chat_id):
+            api.sendReplyMessage(
+                message_id, 
+                chat_id,
+                _horoscope()
+            )
 
     elif command[0:len('/w')] == '/w':
-        api.sendMarkdownMessage(
-            chat_id,
-            news.data(username, command[len('/w') + 1:])
-        )
-        api.deleteMessage(
-            message_id,
-            chat_id
-        )
+        if auth.is_private_or_supergroup_auth(chat_type, chat_id, username):
+            api.sendMarkdownMessage(
+                api.CHAT_ID,
+                news.data(username, command[len('/w') + 1:])
+            )
+            api.deleteMessage(
+                message_id,
+                chat_id
+            )
 
 
 def _weather():
