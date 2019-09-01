@@ -72,7 +72,7 @@ def _router():
         if auth.is_private_or_supergroup_auth(chat_type, chat_id, username):
             api.sendMarkdownMessage(
                 api.CHAT_ID,
-                news.data(first_name, last_name, command[len('/w') + 1:])
+                news.data(first_name, command[len('/w') + 1:])
             )
             api.deleteMessage(
                 message_id,
