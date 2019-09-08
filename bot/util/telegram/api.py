@@ -43,7 +43,7 @@ def sendReplyMessage(message_id, chat_id, text):
 
 def forwardMessage(chat_id, from_chat_id, message_id):
     requests.post(
-        _url_send_message(),
+        _url_forward_message(),
         data={
             'chat_id': chat_id, 
             'from_chat_id': from_chat_id, 
@@ -68,3 +68,7 @@ def _url_send_message():
 
 def _url_delete_message():
     return f'{URL}deleteMessage'
+
+
+def _url_forward_message():
+    return f'{URL}forwardMessage'
