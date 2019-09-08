@@ -9,6 +9,7 @@ def run():
 
 
 def _listener_content():
+    print('_listener_content', api.CHAT_ID == parser.chat_id(), api.CHAT_ID, parser.chat_id())
     if api.CHAT_ID == parser.chat_id():
         if parser.text() is not None:
             if _check_links():
@@ -18,9 +19,10 @@ def _listener_content():
 
     
 def _listener_news():
+    print('_listener_news', api.CHAT_NEWS_ID == parser.chat_id(), api.CHAT_NEWS_ID, parser.chat_id())
     if api.CHAT_NEWS_ID == parser.chat_id():
         news = models.News.query.first()
-    
+
         if news is not None:
             print('news', news.count)
             news.count += 1
