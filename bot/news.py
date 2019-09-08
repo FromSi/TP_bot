@@ -9,7 +9,6 @@ def run():
 
 
 def _listener_content():
-    print('_listener_content', int(api.CHAT_ID) == int(parser.chat_id()), api.CHAT_ID, parser.chat_id())
     if int(api.CHAT_ID) == int(parser.chat_id()):
         if parser.text() is not None:
             if _check_links():
