@@ -5,45 +5,65 @@ def parse():
     return request.get_json()
 
 
+def message():
+    if parse().get('message') is not None:
+        return parse().get('message')
+    return None
+
+
 def chat():
-    return parse()['message']['chat']
+    if message():
+        return parse()['message']['chat']
+    return None
 
 
 def chat_id():
-    return parse()['message']['chat']['id']
+    if chat() is not None:
+        return parse()['message']['chat']['id']
+    return None
 
 
 def type():
-    return parse()['message']['chat']['type']
+    if chat() is not None:
+        return parse()['message']['chat']['type']
+    return None
 
 
-def command():
-    if parse().get('message') is not None:
-        if parse().get('message').get('text') is not None:
-            return parse()['message']['text']
+def text():
+    if message():
+        if message().get('text') is not None:
+            return message().get('text')
     return None
 
 
 def username():
-    if parse()['message'].get('from') is not None:
-        if parse()['message'].get('from').get('username'):
-            return parse()['message']['from']['username']
+    if message().get('from') is not None:
+        if message().get('from').get('username'):
+            return message().get('from').get('username')
     return None
 
 
 def first_name():
-    if parse()['message'].get('from') is not None:
-        if parse()['message'].get('from').get('first_name'):
-            return parse()['message']['from']['first_name']
+    if message().get('from') is not None:
+        if message().get('from').get('first_name'):
+            return message().get('from').get('first_name')
     return None
 
 
 def last_name():
-    if parse()['message'].get('from') is not None:
-        if parse()['message'].get('from').get('last_name'):
-            return parse()['message']['from']['last_name']
+    if message().get('from') is not None:
+        if message().get('from').get('last_name'):
+            return message().get('from').get('last_name')
     return None
 
 
 def message_id():
-    return parse()['message']['message_id']
+    if message():
+        return message()['message_id']
+    return None
+
+
+def forward_from_message_id():
+    if message() and message().get('forward_from_message_id') is not None:
+        return message().get('forward_from_message_id')
+    return None

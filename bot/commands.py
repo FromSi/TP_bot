@@ -1,6 +1,6 @@
 from bot.messages import pidor_stat
 from bot.util.telegram import parser, api
-from bot import models, db
+from bot import models, db, news
 from bot.messages import horoscope, weather, news, start, help
 from bot.util import helpers, auth
 
@@ -12,8 +12,10 @@ def run():
 def _router():
     print('INFO:', parser.parse())
 
-    if parser.command() is not None:
-        command = parser.command()
+    news.listener_content()
+
+    if parser.text() is not None:
+        command = parser.text()
         message_id = parser.message_id()
         chat_id = parser.chat_id()
         chat_type = parser.type()
