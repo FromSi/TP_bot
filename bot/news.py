@@ -18,8 +18,8 @@ def _listener_content():
 
     
 def _listener_news():
-    print(2, str(api.CHAT_NEWS_ID) == str(parser.chat_id()), str(api.CHAT_NEWS_ID), str(parser.chat_id()))
-    if str(api.CHAT_NEWS_ID) == str(parser.chat_id()):
+    print(2, str(api.CHAT_NEWS_ID) == str(parser.channel_id()), str(api.CHAT_NEWS_ID), str(parser.channel_id()))
+    if str(api.CHAT_NEWS_ID) == str(parser.channel_id()):
         news = models.News.query.first()
 
         if news is not None:

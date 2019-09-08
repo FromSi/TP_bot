@@ -23,6 +23,12 @@ def chat_id():
     return None
 
 
+def channel_id():
+    if parse().get('channel_post') is not None:
+        return parse().get('channel_post')['chat']['id']
+    return None
+
+
 def type():
     if chat() is not None:
         return parse()['message']['chat']['type']
