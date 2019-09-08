@@ -18,8 +18,9 @@ def type():
 
 
 def command():
-    if parse()['message'].get('text') is not None:
-        return parse()['message']['text']
+    if parse().get('message') is not None:
+        if parse().get('message').get('text') is not None:
+            return parse()['message']['text']
     return None
 
 
