@@ -3,7 +3,7 @@ from bot import commands
 
 
 TOKEN = os.environ['TOKEN_BOT']
-CHAT_ID = os.environ['CHAT_ID']
+CHAT_ID = os.environ['CHAT_ID_FROMSI']
 CHAT_NEWS_ID = os.environ['CHAT_NEWS_ID']
 URL = f'https://api.telegram.org/bot{TOKEN}/'
 
