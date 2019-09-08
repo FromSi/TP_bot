@@ -54,4 +54,4 @@ def _check_links():
 
 def _send_message():
     api.forwardMessage(api.CHAT_NEWS_ID, api.CHAT_ID, parser.message_id())
-    api.deleteMessage(parser.message_id, api.CHAT_ID)
+    api.deleteMessage(parser.message_id(), api.CHAT_ID)
