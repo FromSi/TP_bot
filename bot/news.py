@@ -18,12 +18,10 @@ def _listener_content():
 
     
 def _listener_news():
-    print(2, str(api.CHAT_NEWS_ID) == str(parser.channel_id()), str(api.CHAT_NEWS_ID), str(parser.channel_id()))
     if str(api.CHAT_NEWS_ID) == str(parser.channel_id()):
         news = models.News.query.first()
 
         if news is not None:
-            print('news', news.count)
             news.count += 1
             db.session.add(news)
             db.session.commit()
@@ -31,7 +29,8 @@ def _listener_news():
             new_news = models.News(count=1)
             db.session.add(new_news)
             db.session.commit()
-            print('news', news.count)
+        
+        print(news.count)
 
 
 def _check_links():
