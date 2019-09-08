@@ -23,7 +23,7 @@ def main():
         text += horoscope.data(obj_horoscope['name'], obj_horoscope['symbol'])
         text += '\n' + weather.data(obj_weather['link'])
 
-        api.sendMessage(text + '\n🤖 Бета версия')
+        api.sendMessage(api.CHAT_ID, text + '\n🤖 Бета версия')
         _write_result(user)
 
 
