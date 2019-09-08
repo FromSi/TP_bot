@@ -14,7 +14,7 @@ def _listener_content():
             if _check_links():
                 _send_message()
                 _add_count_news()
-        elif parser.forward_from_message_id is not None:
+        elif parser.forward_from is not None:
             _send_message()
             _add_count_news()
 

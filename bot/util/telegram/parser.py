@@ -69,7 +69,7 @@ def message_id():
     return None
 
 
-def forward_from_message_id():
-    if message() and message().get('forward_from_message_id') is not None:
-        return message().get('forward_from_message_id')
+def forward_from():
+    if message() and message().get('forward_from') is not None:
+        return message().get('forward_from')
     return None
