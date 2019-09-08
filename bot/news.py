@@ -10,13 +10,14 @@ def run():
 
 def _listener_content():
     if str(api.CHAT_ID) == str(parser.chat_id()):
-        if parser.text() is not None:
+
+        if parser.forward_from is not None:
+            _send_message()
+            _add_count_news()
+        elif parser.text() is not None:
             if _check_links():
                 _send_message()
                 _add_count_news()
-        elif parser.forward_from is not None:
-            _send_message()
-            _add_count_news()
 
     
 def _listener_news():
