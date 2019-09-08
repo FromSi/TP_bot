@@ -10,126 +10,142 @@ def run():
 
 
 def _router():
-    command = parser.command()
-    message_id = parser.message_id()
-    chat_id = parser.chat_id()
-    chat_type = parser.type()
-    username = parser.username()
-    first_name = parser.first_name()
+    if parser.type() is not None and parser.command() is not None:
+        command = parser.command()
+        message_id = parser.message_id()
+        chat_id = parser.chat_id()
+        chat_type = parser.type()
 
-    if command == '/start':
-        if auth.is_private(chat_type):
-            api.sendMarkdownMessage(
-                chat_id,
-                start.data()
-            )
+        if command == '/start':
+            if auth.is_private(chat_type):
+                api.sendMarkdownMessage(
+                    chat_id,
+                    start.data()
+                )
 
-    elif command == '/help':
-        if auth.is_private_auth(chat_type, username):
-            api.sendMarkdownMessage(
-                chat_id,
-                help.data()
-            )
+        elif command == '/help':
+            if parser.username() is not None:
+                if auth.is_private_auth(chat_type, parser.username()):
+                    api.sendMarkdownMessage(
+                        chat_id,
+                        help.data()
+                    )
+            else:
+                return 'ERR'
 
-    elif command == '/pidorrate@pidroid65_bot' or command == '/pidorrate':
-        if auth.is_private_or_supergroup(chat_type, chat_id):
-            api.sendMessage(
-                chat_id,
-                pidor_stat.get_rate()
-            )
+        elif command == '/pidorrate@pidroid65_bot' or command == '/pidorrate':
+            if auth.is_private_or_supergroup(chat_type, chat_id):
+                api.sendMessage(
+                    chat_id,
+                    pidor_stat.get_rate()
+                )
 
-    elif command == '/pidormembers@pidroid65_bot' or command == '/pidormembers':
-        if auth.is_private_or_supergroup(chat_type, chat_id):
-            api.sendMessage(
-                chat_id,
-                pidor_stat.get_members()
-            )
+        elif command == '/pidormembers@pidroid65_bot' or command == '/pidormembers':
+            if auth.is_private_or_supergroup(chat_type, chat_id):
+                api.sendMessage(
+                    chat_id,
+                    pidor_stat.get_members()
+                )
 
-    elif command == '/pidorswitch@pidroid65_bot' or command == '/pidorswitch':
-        if auth.is_private_or_supergroup(chat_type, chat_id):
-            api.sendMessage(
-                chat_id,
-                _pidor_switch()
-            )
+        elif command == '/pidorswitch@pidroid65_bot' or command == '/pidorswitch':
+            if auth.is_private_or_supergroup(chat_type, chat_id):
+                api.sendMessage(
+                    chat_id,
+                    _pidor_switch()
+                )
 
-    elif command == '/weather@pidroid65_bot' or command == '/weather':
-        if auth.is_private_or_supergroup(chat_type, chat_id):
-            api.sendReplyMessage(
-                message_id, 
-                chat_id,
-                _weather()
-            )
+        elif command == '/weather@pidroid65_bot' or command == '/weather':
+            if auth.is_private_or_supergroup(chat_type, chat_id):
+                api.sendReplyMessage(
+                    message_id, 
+                    chat_id,
+                    _weather()
+                )
 
-    elif command == '/horoscope@pidroid65_bot' or command == '/horoscope':
-        if auth.is_private_or_supergroup(chat_type, chat_id):
-            api.sendReplyMessage(
-                message_id, 
-                chat_id,
-                _horoscope()
-            )
+        elif command == '/horoscope@pidroid65_bot' or command == '/horoscope':
+            if auth.is_private_or_supergroup(chat_type, chat_id):
+                api.sendReplyMessage(
+                    message_id, 
+                    chat_id,
+                    _horoscope()
+                )
 
-    elif command[0:len('/w')] == '/w':
-        if auth.is_private_or_supergroup_auth(chat_type, chat_id, username):
-            api.sendMarkdownMessage(
-                api.CHAT_ID,
-                news.data(first_name, command[len('/w') + 1:])
-            )
-            api.deleteMessage(
-                message_id,
-                chat_id
-            )
+        elif command[0:len('/w')] == '/w':
+            if parser.username() is not None and parser.first_name() is not None:
+                if auth.is_private_or_supergroup_auth(chat_type, chat_id, parser.username()):
+                    api.sendMarkdownMessage(
+                        api.CHAT_ID,
+                        news.data(parser.first_name(), command[len('/w') + 1:])
+                    )
+                    api.deleteMessage(
+                        message_id,
+                        chat_id
+                    )
+            else: 
+                return 'ERR'
+    else:
+        return 'ERR'
 
 
 def _weather():
-    username = parser.username()
-    user = models.User.query.filter_by(username=username).first()
+    if parser.username() is not None:
+        username = parser.username()
+        user = models.User.query.filter_by(username=username).first()
 
-    if user is None:
-        return 'Ты вначале зарегайся, а потом проси..'
+        if user is None:
+            return 'Ты вначале зарегайся, а потом проси..'
+        else:
+            obj = helpers.weather(user)
+
+            return weather.data(obj['link'])
     else:
-        obj = helpers.weather(user)
-
-        return weather.data(obj['link'])
+        return 'ERR'
 
 
 def _horoscope():
-    username = parser.username()
-    user = models.User.query.filter_by(username=username).first()
+    if parser.username() is not None:
+        username = parser.username()
+        user = models.User.query.filter_by(username=username).first()
 
-    if user is None:
-        return 'Ты вначале зарегайся, а потом проси..'
+        if user is None:
+            return 'Ты вначале зарегайся, а потом проси..'
+        else:
+            obj = helpers.horoscope(user)
+
+            return horoscope.data(obj['name'], obj['symbol'])
     else:
-        obj = helpers.horoscope(user)
-        
-        return horoscope.data(obj['name'], obj['symbol'])
+        return 'ERR'
 
 
 def _pidor_switch():
-    username = parser.username()
-    user = models.User.query.filter_by(username=username).first()
-    
-    answer_one = 'Тебя еще не зарегали в базу пользователей! Ты нахуй никому не нужен!'
-    answer_two = 'Всё! Ты в игре!! ТОБИ ПЕЗТА!!!'
-    answer_three = 'С тобой ВСЁ!'
+    if parser.username() is not None:
+        username = parser.username()
+        user = models.User.query.filter_by(username=username).first()
 
-    if user is None:
-        return answer_one
-    else:
-        user_id = user.id
-        player = models.PidorGame.query.filter_by(user_id=user_id).first()
+        answer_one = 'Тебя еще не зарегали в базу пользователей! Ты нахуй никому не нужен!'
+        answer_two = 'Всё! Ты в игре!! ТОБИ ПЕЗТА!!!'
+        answer_three = 'С тобой ВСЁ!'
 
-        if player is None:
-            new_player = models.PidorGame(is_active=True, user=user)
-            db.session.add(new_player)
-            db.session.commit()
-            
-            return answer_two
+        if user is None:
+            return answer_one
         else:
-            player.is_active = not player.is_active
-            db.session.add(player)
-            db.session.commit()
+            user_id = user.id
+            player = models.PidorGame.query.filter_by(user_id=user_id).first()
 
-            if player.is_active:                
+            if player is None:
+                new_player = models.PidorGame(is_active=True, user=user)
+                db.session.add(new_player)
+                db.session.commit()
+
                 return answer_two
             else:
-                return answer_three
+                player.is_active = not player.is_active
+                db.session.add(player)
+                db.session.commit()
+
+                if player.is_active:                
+                    return answer_two
+                else:
+                    return answer_three
+    else:
+        return 'ERR'

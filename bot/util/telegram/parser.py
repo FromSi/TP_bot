@@ -18,19 +18,30 @@ def type():
 
 
 def command():
-    return parse()['message']['text']
+    if parse()['message'].get('text') is not None:
+        return parse()['message']['text']
+    return None
 
 
 def username():
-    return parse()['message']['from']['username']
+    if parse()['message'].get('from') is not None:
+        if parse()['message'].get('from').get('username'):
+            return parse()['message']['from']['username']
+    return None
 
 
 def first_name():
-    return parse()['message']['from']['first_name']
+    if parse()['message'].get('from') is not None:
+        if parse()['message'].get('from').get('first_name'):
+            return parse()['message']['from']['first_name']
+    return None
 
 
 def last_name():
-    return parse()['message']['from']['last_name']
+    if parse()['message'].get('from') is not None:
+        if parse()['message'].get('from').get('last_name'):
+            return parse()['message']['from']['last_name']
+    return None
 
 
 def message_id():
