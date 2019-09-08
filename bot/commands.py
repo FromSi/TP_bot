@@ -13,7 +13,7 @@ def run():
 def _router():
     print('INFO:', parser.parse())
 
-    news_handler.listener_content()
+    news_handler.run()
 
     if parser.text() is not None:
         command = parser.text()

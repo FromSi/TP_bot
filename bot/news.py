@@ -1,17 +1,33 @@
 import re
 from bot.util.telegram import parser, api
+from bot import models, db
 
 
-def listener_content():
+def run():
+    _listener_content()
+    _listener_news()
+
+
+def _listener_content():
     if parser.text() is not None:
         if _check_links():
             _send_message()
     elif parser.forward_from_message_id is not None:
         _send_message()
 
+    
+def _listener_news():
+    news = models.News.query.first()
 
-def listener_news():
-    pass
+    if news is not None:
+        print('news', news.count)
+        news.count += 1
+        db.session.add(news)
+        db.session.commit()
+    else:
+        new_news = models.News(count=0)
+        db.session.add(new_news)
+        db.session.commit()
 
 
 def _check_links():

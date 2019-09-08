@@ -3,9 +3,7 @@ from bot import db
 
 class News(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    default_count = db.Column(db.Integer)
-    link_count = db.Column(db.Integer)
-    forward_count = db.Column(db.Integer)
+    count = db.Column(db.Integer)
 
 
 class Emoji(db.Model):
