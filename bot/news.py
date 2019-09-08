@@ -9,7 +9,7 @@ def listener_content():
              parser.text()
         )
 
-        if len(links) !== 0:
+        if len(links) != 0:
             _send_message()
     elif parser.forward_from_message_id is not None:
         _send_message()
