@@ -10,7 +10,9 @@ def run():
 
 
 def _router():
-    if parser.type() is not None and parser.command() is not None:
+    print('INFO:', parser.parse())
+
+    if parser.command() is not None:
         command = parser.command()
         message_id = parser.message_id()
         chat_id = parser.chat_id()
