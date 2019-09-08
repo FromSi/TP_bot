@@ -11,9 +11,9 @@ def run():
 
 
 def _router():
-    print('INFO:', parser.parse())
+    # print('INFO:', parser.parse())
 
-    news_handler.run()
+    # news_handler.run()
 
     if parser.text() is not None:
         command = parser.text()
