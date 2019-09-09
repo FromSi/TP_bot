@@ -78,28 +78,44 @@ def _router():
         elif command[0:len('/w')] == '/w':
             if parser.username() is not None and parser.first_name() is not None:
                 if auth.is_private_or_supergroup_auth(chat_type, chat_id, parser.username()):
+                    text = news.w(parser.first_name(), command[len('/w') + 1:])
+                    
                     api.sendMarkdownMessage(
                         api.CHAT_ID,
-                        news.w(parser.first_name(), command[len('/w') + 1:])
+                        text
+                    )
+                    api.sendMarkdownMessage(
+                        api.CHAT_ID_NEWS,
+                        text
                     )
                     api.deleteMessage(
                         message_id,
                         chat_id
                     )
+
+                    news_handler.add_news()
             else: 
                 return 'ERR'
 
         elif command[0:len('/wa')] == '/wa':
             if parser.username() is not None and parser.first_name() is not None:
                 if auth.is_private_or_supergroup_auth(chat_type, chat_id, parser.username()):
+                    text = news.wa(parser.first_name(), command[len('/wa') + 1:])
+
                     api.sendMarkdownMessage(
                         api.CHAT_ID,
-                        news.wa(parser.first_name(), command[len('/wa') + 1:])
+                        text
+                    )
+                    api.sendMarkdownMessage(
+                        api.CHAT_ID_NEWS,
+                        text
                     )
                     api.deleteMessage(
                         message_id,
                         chat_id
                     )
+
+                    news_handler.add_news()
             else: 
                 return 'ERR'
 
