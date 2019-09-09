@@ -12,20 +12,16 @@ def _listener_content():
     if str(api.CHAT_ID) == str(parser.chat_id()):
 
         if parser.forward_from() is not None:
-            print(1)
             _send_message()
             _add_count_news()
         elif parser.text() is not None:
-            print(2)
             if _check_links():
-                print(3)
                 _send_message()
                 _add_count_news()
 
     
 def _listener_news():
     if str(api.CHAT_NEWS_ID) == str(parser.channel_id()):
-        print(4)
         _add_count_news()
 
 
@@ -44,7 +40,7 @@ def _add_count_news():
 
 def add_news():
     news = models.News.query.first()
-    
+
     news.count += 1
     db.session.add(news)
     db.session.commit()

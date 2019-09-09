@@ -39,6 +39,8 @@ def s(name, body):
     text += '\n\n'
     text += f'_Автор: {name}_'
 
+    print('s', text)
+
     return text
 
 
@@ -49,6 +51,8 @@ def w(name, body):
     text += '\n\n'
     text += f'_Автор: {name}_'
 
+    print('w', text)
+
     return text
 
 
@@ -57,6 +61,8 @@ def sa(name, body):
     text += '\n\n'
     text += body
 
+    print('sa', text)
+
     return text
 
 
@@ -64,6 +70,8 @@ def wa(name, body):
     text = '*Есть новость..*'
     text += '\n\n'
     text += body
+
+    print('wa', text)
 
     return text
 
