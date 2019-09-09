@@ -13,7 +13,7 @@ def run():
 def _router():
     # print('INFO:', parser.parse())
 
-    # news_handler.run()
+    news_handler.run()
 
     if parser.text() is not None:
         command = parser.text()
@@ -80,7 +80,49 @@ def _router():
                 if auth.is_private_or_supergroup_auth(chat_type, chat_id, parser.username()):
                     api.sendMarkdownMessage(
                         api.CHAT_ID,
-                        news.data(parser.first_name(), command[len('/w') + 1:])
+                        news.w(parser.first_name(), command[len('/w') + 1:])
+                    )
+                    api.deleteMessage(
+                        message_id,
+                        chat_id
+                    )
+            else: 
+                return 'ERR'
+
+        elif command[0:len('/wa')] == '/wa':
+            if parser.username() is not None and parser.first_name() is not None:
+                if auth.is_private_or_supergroup_auth(chat_type, chat_id, parser.username()):
+                    api.sendMarkdownMessage(
+                        api.CHAT_ID,
+                        news.wa(parser.first_name(), command[len('/wa') + 1:])
+                    )
+                    api.deleteMessage(
+                        message_id,
+                        chat_id
+                    )
+            else: 
+                return 'ERR'
+
+        elif command[0:len('/s')] == '/s':
+            if parser.username() is not None and parser.first_name() is not None:
+                if auth.is_private_or_supergroup_auth(chat_type, chat_id, parser.username()):
+                    api.sendMarkdownMessage(
+                        api.CHAT_ID,
+                        news.s(parser.first_name(), command[len('/s') + 1:])
+                    )
+                    api.deleteMessage(
+                        message_id,
+                        chat_id
+                    )
+            else: 
+                return 'ERR'
+
+        elif command[0:len('/sa')] == '/sa':
+            if parser.username() is not None and parser.first_name() is not None:
+                if auth.is_private_or_supergroup_auth(chat_type, chat_id, parser.username()):
+                    api.sendMarkdownMessage(
+                        api.CHAT_ID,
+                        news.sa(parser.first_name(), command[len('/sa') + 1:])
                     )
                     api.deleteMessage(
                         message_id,

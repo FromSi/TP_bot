@@ -33,15 +33,19 @@ def _add_count_news():
     news = models.News.query.first()
 
     if news is not None:
-        news.count += 1
-        db.session.add(news)
-        db.session.commit()
+        add_news()
     else:
         new_news = models.News(count=1)
         db.session.add(new_news)
         db.session.commit()
     
     print(news.count)
+
+
+def add_news():
+    news.count += 1
+    db.session.add(news)
+    db.session.commit()
 
 
 def _check_links():

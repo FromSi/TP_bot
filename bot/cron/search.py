@@ -10,6 +10,8 @@ engine = db.create_engine(os.environ['DATABASE_URL'])
 connection = engine.connect()
 metadata = db.MetaData()
 
+from bot import news
+
 
 def main():
     players = _get_players_pidor_game()
@@ -25,6 +27,9 @@ def main():
 
         api.sendMessage(api.CHAT_ID, text + '\n🤖 Бета версия')
         _write_result(user)
+
+        news.add_news()
+        api.sendMessage(api.CHAT_NEWS_ID, text)
 
 
 def _write_result(user):

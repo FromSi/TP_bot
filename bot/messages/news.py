@@ -25,7 +25,6 @@ title_list = [
     'Не пропусти СЕКС новость!',
     'Очень важное сообщение!',
     'БЛЯЯ если ты это пропустишь!',
-    'ЕБАААААтть читать всем!',
     'Вы щас уйдёте в унисон!',
     'Контент подвезли!',
     'От такой новости Ленин перевернулся!',
@@ -33,12 +32,38 @@ title_list = [
 ]
 
 
-def data(first_name, body):
+def s(name, body):
     text = _title()
     text += '\n\n'
     text += body
     text += '\n\n'
-    text += f'_Автор: {first_name}_'
+    text += f'_Автор: {name}_'
+
+    return text
+
+
+def w(name, body):
+    text = '*Есть новость..*'
+    text += '\n\n'
+    text += body
+    text += '\n\n'
+    text += f'_Автор: {name}_'
+
+    return text
+
+
+def sa(name, body):
+    text = _title()
+    text += '\n\n'
+    text += body
+
+    return text
+
+
+def wa(name, body):
+    text = '*Есть новость..*'
+    text += '\n\n'
+    text += body
 
     return text
 
