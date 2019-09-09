@@ -43,6 +43,8 @@ def _add_count_news():
 
 
 def add_news():
+    news = models.News.query.first()
+    
     news.count += 1
     db.session.add(news)
     db.session.commit()
