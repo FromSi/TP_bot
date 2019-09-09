@@ -96,7 +96,7 @@ def _router():
 
                         news_handler.add_news()
 
-            if parser.username() is not None and parser.first_name() is not None:
+            elif parser.username() is not None and parser.first_name() is not None:
                 if auth.is_private_or_supergroup_auth(chat_type, chat_id, parser.username()):
                     text = news.s(parser.first_name(), command[len('/s') + 1:])
                     
@@ -129,7 +129,7 @@ def _router():
                             message_id,
                             chat_id
                         )
-            if parser.username() is not None and parser.first_name() is not None:
+            elif parser.username() is not None and parser.first_name() is not None:
                 if auth.is_private_or_supergroup_auth(chat_type, chat_id, parser.username()):
                     api.sendMarkdownMessage(
                         api.CHAT_ID,
