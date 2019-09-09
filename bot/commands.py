@@ -78,7 +78,7 @@ def _router():
         elif command[0:len('/s')] == '/s':
             if parser.username() is not None and parser.first_name() is not None:
                 if auth.is_private_or_supergroup_auth(chat_type, chat_id, parser.username()):
-                    text = news.w(parser.first_name(), command[len('/s') + 1:])
+                    text = news.s(parser.first_name(), command[len('/s') + 1:])
                     
                     api.sendMarkdownMessage(
                         api.CHAT_ID,
@@ -100,7 +100,7 @@ def _router():
         elif command[0:len('/sa')] == '/sa':
             if parser.username() is not None and parser.first_name() is not None:
                 if auth.is_private_or_supergroup_auth(chat_type, chat_id, parser.username()):
-                    text = news.wa(parser.first_name(), command[len('/sa') + 1:])
+                    text = news.sa(parser.first_name(), command[len('/sa') + 1:])
 
                     api.sendMarkdownMessage(
                         api.CHAT_ID,
@@ -124,7 +124,7 @@ def _router():
                 if auth.is_private_or_supergroup_auth(chat_type, chat_id, parser.username()):
                     api.sendMarkdownMessage(
                         api.CHAT_ID,
-                        news.s(parser.first_name(), command[len('/w') + 1:])
+                        news.w(parser.first_name(), command[len('/w') + 1:])
                     )
                     api.deleteMessage(
                         message_id,
@@ -138,7 +138,7 @@ def _router():
                 if auth.is_private_or_supergroup_auth(chat_type, chat_id, parser.username()):
                     api.sendMarkdownMessage(
                         api.CHAT_ID,
-                        news.sa(parser.first_name(), command[len('/wa') + 1:])
+                        news.wa(parser.first_name(), command[len('/wa') + 1:])
                     )
                     api.deleteMessage(
                         message_id,
