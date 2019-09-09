@@ -85,7 +85,7 @@ def _router():
                         text
                     )
                     api.sendMarkdownMessage(
-                        api.CHAT_ID_NEWS,
+                        api.CHAT_NEWS_ID,
                         text
                     )
                     api.deleteMessage(
@@ -107,7 +107,7 @@ def _router():
                         text
                     )
                     api.sendMarkdownMessage(
-                        api.CHAT_ID_NEWS,
+                        api.CHAT_NEWS_ID,
                         text
                     )
                     api.deleteMessage(
